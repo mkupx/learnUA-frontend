@@ -1,7 +1,6 @@
 import "../Profile.scss";
 import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import { useEffect } from "react";
-import { axiosPrivate } from "../../../../api/axios";
 
 const ProfileInfo = () => {
   useAxiosPrivate();
@@ -15,10 +14,10 @@ const ProfileInfo = () => {
   };
 
   useEffect(() => {
-    axiosPrivate.get("/api/user/3/profile")
-      .then(response => {
-        console.log("Profile data:", response.data);
-      })
+    // axiosPrivate.get("/api/user/3/profile")
+    //   .then(response => {
+    //     console.log("Profile data:", response.data);
+    //   })
   })
 
   const avatarClass: string = "w-40 rounded";

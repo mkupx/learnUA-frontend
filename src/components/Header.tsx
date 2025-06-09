@@ -1,22 +1,14 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { themeChange } from "theme-change";
-import { useState } from "react";
+import useIsAuth from "../hooks/useIsAuth";
 
 const Header = () => {
   useEffect(() => {
     themeChange(false);
   }, []);
 
-const [token, setToken] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    const tokenMatch: string | undefined = document.cookie.match(/csrf_access_token=([^;]+)/)?.[1];
-    setToken(tokenMatch);
-  }, []);
-
-
-  
+  const isAuth = useIsAuth();
 
   return (
     <>
@@ -40,7 +32,7 @@ const [token, setToken] = useState<string | undefined>(undefined);
                 Темна
               </button>
             </div>
-            {token ? (
+            {isAuth ? (
               <div className="flex gap-5">
                 <Link to="/profile">
                   <button className="btn btn-primary w-42">Ваш профіль</button>

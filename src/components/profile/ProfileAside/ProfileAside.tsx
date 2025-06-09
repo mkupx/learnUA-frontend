@@ -1,14 +1,16 @@
 import "./ProfileAside.scss";
-import axios from "axios";
 
 import { Link, useLocation } from "react-router-dom";
 import { LogOut, Settings, User } from "lucide-react";
+
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 // Bell, Shield
 
 const ProfileAside = () => {
   const location = useLocation();
   const current = location.pathname;
+  const axiosPrivate = useAxiosPrivate();
 
   const menuItems = [
     { name: "Профіль", to: "/profile", icon: <User size={18} /> },
@@ -20,7 +22,7 @@ const ProfileAside = () => {
   function logout() {
     const csrfToken: string | undefined = document.cookie.match(/csrf_access_token=([^;]+)/)?.[1];
 
-    axios
+    axiosPrivate
       .delete("/api/auth/logout", {
         withCredentials: true,
         headers: {

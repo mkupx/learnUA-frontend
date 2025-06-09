@@ -11,7 +11,11 @@ const useAxiosPrivate = () => {
       async (error) => {
         const prevRequest = error.config;
 
-        if (error?.response?.status === 401 && !prevRequest._retry) {
+        if (
+          error?.response?.status === 401 &&
+          prevRequest &&
+          !prevRequest._retry
+        ) {
           prevRequest._retry = true;
           try {
             await refresh();
@@ -29,6 +33,8 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.response.eject(responseInterceptor);
     };
   }, [refresh]);
+
+  return axiosPrivate;
 };
 
 export default useAxiosPrivate;
