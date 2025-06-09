@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { LogOut, Settings, User } from "lucide-react";
 
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { useAuth } from "../../../context/AuthContext";
 
 // Bell, Shield
 
@@ -12,6 +13,8 @@ const ProfileAside = () => {
   const current = location.pathname;
   const axiosPrivate = useAxiosPrivate();
 
+  const { logout } = useAuth();
+
   const menuItems = [
     { name: "Профіль", to: "/profile", icon: <User size={18} /> },
     { name: "Налаштування", to: "/settings", icon: <Settings size={18} /> },
@@ -19,7 +22,7 @@ const ProfileAside = () => {
     // { name: "Безпека", to: "/security", icon: <Shield size={18} /> },
   ];
 
-  function logout() {
+  function handleLogout() {
     const csrfToken: string | undefined = document.cookie.match(/csrf_access_token=([^;]+)/)?.[1];
 
     axiosPrivate
@@ -32,6 +35,7 @@ const ProfileAside = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("Ви вийшли з профілю!");
+          logout();
           window.location.href = "/";
         }
       });
@@ -48,7 +52,7 @@ const ProfileAside = () => {
         ))}
         <button
           onClick={() => {
-            logout();
+            handleLogout();
           }}
           className="btn btn-error btn-outline mt-4 justify-start gap-2"
         >

@@ -1,32 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import useAxiosPrivate from "./useAxiosPrivate";
-import { useLoading } from "../context/LoadingContext";
+import { useAuth } from "../context/AuthContext";
 
 const useIsAuth = () => {
-    const [isAuth, setIsAuth] = useState<boolean | null>(null);
     const axiosPrivate = useAxiosPrivate();
-    const { setLoading } = useLoading();
-    useEffect(() => {
-        setLoading(true);
-        return () => setLoading(false);
-    }, [setLoading]);
+    const { login, logout } = useAuth();
 
     useEffect(() => {
-        let isMounted = true;
         axiosPrivate
             .get("/api/auth/is-authorized")
             .then((response) => {
-                if (isMounted) setIsAuth(response.status === 200);
+                if (response.status === 200) {
+                    login();
+                }
+                else {
+                    logout();
+                }
             })
             .catch(() => {
-                if (isMounted) setIsAuth(false);
+                logout();
             });
         return () => {
-            isMounted = false;
         };
     }, []);
 
-    return isAuth;
 };
 
 export default useIsAuth;
+

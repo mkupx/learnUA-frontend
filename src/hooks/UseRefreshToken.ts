@@ -1,6 +1,9 @@
 import { axiosPrivate } from "../api/axios";
+import { useAuth } from "../context/AuthContext";
 
 const useRefreshToken = () => {
+
+    const { login } = useAuth();
 
     const refresh = async () => {
 
@@ -14,7 +17,12 @@ const useRefreshToken = () => {
                         "X-CSRF-TOKEN": csrfToken,
                     },
                 }
-            );
+            )
+            .then((response) => {
+                if (response.status === 200) {
+                    login();
+                }
+            });
         } catch (error) {
             console.error("Failed to refresh token:", error);
             throw error;

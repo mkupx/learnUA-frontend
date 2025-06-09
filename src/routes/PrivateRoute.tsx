@@ -1,16 +1,22 @@
 import Header from "../components/Header";
 import useIsAuth from "../hooks/useIsAuth";
+import { useAuth } from "../context/AuthContext";
+import type React from "react";
+
+
 
 interface Props {
-  children: JSX.Element;
+
+  children: React.ReactNode;
 }
 
 export default function PrivateRoute({ children }: Props) {
-  const isAuth = useIsAuth();
+  const { isAuth } = useAuth();
+  useIsAuth();
 
   return (
     <>
-      {isAuth ? (
+      {isAuth === true ? (
         children
       ) : (
         <>

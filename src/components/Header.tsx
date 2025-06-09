@@ -1,14 +1,18 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { themeChange } from "theme-change";
+import { useAuth } from "../context/AuthContext";
 import useIsAuth from "../hooks/useIsAuth";
+
 
 const Header = () => {
   useEffect(() => {
     themeChange(false);
   }, []);
+  
 
-  const isAuth = useIsAuth();
+  const { isAuth } = useAuth();
+  useIsAuth();
 
   return (
     <>
@@ -32,7 +36,7 @@ const Header = () => {
                 Темна
               </button>
             </div>
-            {isAuth ? (
+            {isAuth === true ? (
               <div className="flex gap-5">
                 <Link to="/profile">
                   <button className="btn btn-primary w-42">Ваш профіль</button>

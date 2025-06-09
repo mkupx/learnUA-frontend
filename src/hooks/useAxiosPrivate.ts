@@ -10,11 +10,15 @@ const useAxiosPrivate = () => {
       response => response,
       async (error) => {
         const prevRequest = error.config;
+        const refreshToken = document.cookie
+        .split("; ")
+        .find(row => row.startsWith("csrf_access_token="))
+        ?.split("=")[1];
 
         if (
           error?.response?.status === 401 &&
           prevRequest &&
-          !prevRequest._retry
+          !prevRequest._retry && refreshToken
         ) {
           prevRequest._retry = true;
           try {
