@@ -1,12 +1,9 @@
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import useIsAuth from "../hooks/useIsAuth";
 import { useAuth } from "../context/AuthContext";
 import type React from "react";
 
-
-
 interface Props {
-
   children: React.ReactNode;
 }
 
