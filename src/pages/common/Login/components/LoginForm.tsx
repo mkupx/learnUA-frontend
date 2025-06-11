@@ -17,7 +17,6 @@ export default function LoginForm() {
       .post("/api/auth/login", { email, password })
       .then((response) => {
         if (response.status === 200) {
-          alert("Вхід успішний! Перенаправлення на головну сторінку...");
           login();
           navigate("/profile");
         }

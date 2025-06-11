@@ -27,7 +27,6 @@ export default function RegisterForm() {
       )
       .then((response) => {
         if (response.status === 200) {
-          alert("Реєстрація успішна! Перенаправлення на сторінку входу...");
           navigate("/login");
         }
         else if (response.status === 409 || response.error) {

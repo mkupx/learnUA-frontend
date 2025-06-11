@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 const ProfileInfo = () => {
   const axiosPrivate = useAxiosPrivate();
   const [profile, setProfile] = useState<{
-    name: string;
+    first_name: string;
+    last_name: string;
     email: string;
-    avatar: string;
-    joined: string;
-    status: string;
+    age: number;
+    reg_datetime: string;
   } | null>(null);
 
   const [error, setError] = useState<string | null>(null);
@@ -25,8 +25,7 @@ const ProfileInfo = () => {
           },
         });
 
-        console.log("Profile data:", response.data);
-        setProfile(response.data);
+        setProfile(response.data.user_data);
       } catch (err) {
         console.error("Error fetching profile:", err);
         setError("Не вдалося завантажити профіль.");
@@ -65,19 +64,17 @@ const ProfileInfo = () => {
         <div className="flex gap-5">
           <div className="avatar">
             <div className={avatarClass}>
-              <img src={profile.avatar} alt="avatar" />
+              <img src="#" alt="avatar" />
             </div>
           </div>
           <div className="flex-1 flex flex-col justify-between">
             <div className="flex flex-col gap-4">
-              <h2 className={nameClass}>{profile.name}</h2>
+              <h2 className={nameClass}>{profile.first_name} {profile.last_name}</h2>
               <p className={emailClass}>{profile.email}</p>
               <ul className={infoListClass}>
                 <li>
-                  <span className="font-medium">Дата реєстрації:</span> {profile.joined}
-                </li>
-                <li>
-                  <span className="font-medium">Статус:</span> {profile.status}
+                  <span className="font-medium block">Дата реєстрації:</span> {profile.reg_datetime}
+                  <span className="font-medium">{profile.age} років</span>
                 </li>
               </ul>
             </div>

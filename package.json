@@ -12,15 +12,18 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.8",
     "axios": "^1.9.0",
+    "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.511.0",
+    "path": "^0.12.7",
     "react": "^19.1.0",
     "react-cookie": "^8.0.1",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
     "sass": "^1.89.1",
     "tailwindcss": "^4.1.8",
-    "theme-change": "^2.5.0"
+    "theme-change": "^2.5.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
