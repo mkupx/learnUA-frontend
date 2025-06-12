@@ -2,3 +2,24 @@
   flex: 1 1 0;
   min-width: 0;
 }
+
+.settingsAvatarInput {
+  display: none;
+}
+
+.settingsAvatarImg {
+  max-width: 300px;
+  max-height: 200px;
+}
+
+.settingsAvatarLabel {
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.avatarWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

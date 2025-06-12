@@ -5,5 +5,8 @@ export default axios.create({
 })
 
 export const axiosPrivate = axios.create({
-    withCredentials: true
+    withCredentials: true,
+    headers: {
+        "X-CSRF-TOKEN": document.cookie.match(/csrf_access_token=([^;]+)/)?.[1],
+    }
 });

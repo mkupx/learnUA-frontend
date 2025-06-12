@@ -4,17 +4,26 @@ import Input from "../../../../../components/Input/Input";
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../../../../hooks/useAxiosPrivate";
 import { useNavigate } from "react-router-dom";
+import SettingsAvatar from "../SettingsAvatar";
 
 export default function SettingsForm() {
   const axiosPrivate = useAxiosPrivate();
+
   const navigate = useNavigate();
   const [initialvalues, setInitialvalues] = useState({
     first_name: "",
     last_name: "",
     age: "",
   });
+  const [userId, setUserId] = useState<string>("");
 
-  const handleSubmit = (values) => {
+  interface ValuesTypes {
+    first_name: string;
+    last_name: string;
+    age: string;
+  }
+
+  const handleSubmit = (values: ValuesTypes) => {
     console.log("submit", values);
     const csrfToken: string | undefined = document.cookie.match(/csrf_access_token=([^;]+)/)?.[1];
     axiosPrivate
@@ -39,14 +48,17 @@ export default function SettingsForm() {
           last_name: response.last_name || "",
           age: response.age || "",
         };
+        setUserId(response.id);
         setInitialvalues(userData);
       });
     }
     fetchUserData();
   }, [axiosPrivate]);
 
+
   return (
     <>
+    <SettingsAvatar userId={userId} user={initialvalues}/>
       <Formik
         initialValues={initialvalues}
         onSubmit={handleSubmit}
