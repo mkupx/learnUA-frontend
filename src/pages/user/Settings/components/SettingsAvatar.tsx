@@ -1,16 +1,26 @@
 import { useEffect, useState, FC } from "react";
-import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
+import * as motion from "motion/react-client";
 import "../Settings.scss";
+
+import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
+import { useNavigate } from "react-router-dom";
+
+interface User {
+  first_name: string;
+  last_name: string;
+}
 
 interface Props {
   userId: string;
-  user: any;
+  user: User;
 }
 
 const SettingsAvatar: FC<Props> = ({ userId, user }) => {
   const [avatar, setAvatar] = useState("");
   const axiosPrivate = useAxiosPrivate();
   const [error, setError] = useState<string>("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosPrivate
@@ -42,9 +52,15 @@ const SettingsAvatar: FC<Props> = ({ userId, user }) => {
         },
       })
       .then((data) => {
-        console.log(data);
         if (data.status === 200 && data.data.msg !== "Profile ava updated successfully") {
           setError(data.data.msg);
+        } else if (data.data.msg === "Profile ava updated successfully") {
+          navigate("/profile");
+        }
+      })
+      .catch((error) => {
+        if (error.data.msg !== "Profile ava updated successfully") {
+          setError(error.data.msg);
         }
       });
   }
@@ -66,9 +82,15 @@ const SettingsAvatar: FC<Props> = ({ userId, user }) => {
         )}
         <div className="error mt-3">{error}</div>
         <form action="#">
-          <label htmlFor="avatar" className="btn bg-accent-content settingsAvatarLabel">
+          <motion.label
+            whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+            htmlFor="avatar"
+            className="btn bg-accent-content settingsAvatarLabel"
+          >
             Вибрати аватар
-          </label>
+          </motion.label>
           <input
             type="file"
             accept="image/*"

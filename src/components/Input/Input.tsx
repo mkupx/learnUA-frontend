@@ -17,11 +17,11 @@ const Input: FC<inputProps> = ({ id, label, name, placeholder }) => {
   return (
     <>
       <div className={inputContainer}>
-
-        <label htmlFor={id} className={labelClasses}>{label}</label>
-        <Field name={name} id={id} placeholder={placeholder}  className={fieldClasses}/>
+        <label htmlFor={id} className={labelClasses}>
+          {label}
+        </label>
+        <Field name={name} id={id} placeholder={placeholder} className={fieldClasses} />
         <Error name={name}>{(error) => <span className={errorClasses}>{error}</span>}</Error>
-
       </div>
     </>
   );

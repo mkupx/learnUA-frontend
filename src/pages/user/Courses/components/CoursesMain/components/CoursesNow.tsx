@@ -18,7 +18,7 @@ function CoursesNow() {
             <p className="text-sm mt-1">Прогрес: {course.progress}</p>
           </div>
         ))}
-      </div>
+      </div>    
     </>
   );
 }

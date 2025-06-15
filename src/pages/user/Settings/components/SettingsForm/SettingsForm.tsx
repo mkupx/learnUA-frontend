@@ -1,10 +1,12 @@
 import { Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import useAxiosPrivate from "../../../../../hooks/useAxiosPrivate";
+import SettingsAvatar from "../SettingsAvatar";
 import { settingsValidationSchema } from "./helper";
 import Input from "../../../../../components/Input/Input";
-import { useEffect, useState } from "react";
-import useAxiosPrivate from "../../../../../hooks/useAxiosPrivate";
-import { useNavigate } from "react-router-dom";
-import SettingsAvatar from "../SettingsAvatar";
+import * as motion from "motion/react-client";
 
 export default function SettingsForm() {
   const axiosPrivate = useAxiosPrivate();
@@ -55,10 +57,10 @@ export default function SettingsForm() {
     fetchUserData();
   }, [axiosPrivate]);
 
-
   return (
     <>
-    <SettingsAvatar userId={userId} user={initialvalues}/>
+      <SettingsAvatar userId={userId} user={initialvalues} />
+
       <Formik
         initialValues={initialvalues}
         onSubmit={handleSubmit}
@@ -77,11 +79,16 @@ export default function SettingsForm() {
           </div>
           <div className="flex gap-10">
             <Input label="Вік" name="age" id="age" placeholder="Введіть вік" />
-            {/* <Input label="Телефон" name="phone" id="phone" placeholder="Введіть телефон" /> */}
           </div>
-          <button className="btn btn-primary mt-10" type="submit">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="btn btn-primary mt-10"
+            type="submit"
+          >
             Оновити
-          </button>
+          </motion.button>
         </Form>
       </Formik>
     </>

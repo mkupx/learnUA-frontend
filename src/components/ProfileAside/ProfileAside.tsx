@@ -1,10 +1,11 @@
 import "./ProfileAside.scss";
+import * as motion from "motion/react-client";
 
 import { Link, useLocation } from "react-router-dom";
 import { LogOut, Settings, User } from "lucide-react";
 
-import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { useAuth } from "../../../context/AuthContext";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useAuth } from "../../context/AuthContext";
 
 // Bell, Shield
 
@@ -45,20 +46,40 @@ const ProfileAside = () => {
     <aside className="profile-aside w-64 p-4 bg-base-100 rounded-xl shadow-xl">
       <nav className="flex flex-col gap-2">
         {menuItems.map((item) => (
-          <Link key={item.to} to={item.to} className={`btn justify-start gap-2 ${current === item.to ? "btn-primary text-white" : "btn-ghost hover:bg-base-200"}`}>
-            {item.icon}
-            {item.name}
-          </Link>
+          <motion.div
+            className="w-full"
+            whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <Link
+              className={`btn w-full justify-start gap-2 ${
+                current === item.to ? "btn-primary text-white" : "btn-ghost hover:bg-base-200"
+              }`}
+              key={item.to}
+              to={item.to}
+            >
+              {item.icon}
+              {item.name}
+            </Link>
+          </motion.div>
         ))}
-        <button
-          onClick={() => {
-            handleLogout();
-          }}
-          className="btn btn-error btn-outline mt-4 justify-start gap-2"
+        <motion.div
+          className="w-full"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
         >
-          <LogOut size={18} />
-          Вийти
-        </button>
+          <button
+            onClick={() => {
+              handleLogout();
+            }}
+            className="w-full btn btn-error btn-outline mt-4 justify-start gap-2"
+          >
+            <LogOut size={18} />
+            Вийти
+          </button>
+        </motion.div>
       </nav>
     </aside>
   );
