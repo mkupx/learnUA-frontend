@@ -8,6 +8,8 @@ import Settings from "../pages/user/Settings/Settings";
 import Courses from "../pages/user/Courses/Courses";
 
 import PrivateRoute from "./PrivateRoute";
+import CreateCourse from "../pages/user/Courses/pages/CreateCourse/CreateCourse";
+import UserCourses from "../pages/user/Courses/pages/userCourses/userCourses";
 
 const AppRoutes = () => {
   const navigationRoutes = [
@@ -31,20 +33,43 @@ const AppRoutes = () => {
       ),
     },
     {
-      path: "/courses",
+      path: "/courses/*",
       element: (
         <PrivateRoute>
           <Courses />
         </PrivateRoute>
-      )
-    }
+      ),
+      children: [
+        {
+          path: "createcourse",
+          element: (
+            <PrivateRoute>
+              <CreateCourse />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "userCourses",
+          element: (
+            <PrivateRoute>
+              <UserCourses />
+            </PrivateRoute>
+          ),
+        },
+      ],
+    },
   ];
+
+  const renderRoutes = (routes: any[]) =>
+    routes.map((route) => (
+      <Route key={route.path} path={route.path} element={route.element}>
+        {route.children && renderRoutes(route.children)}
+      </Route>
+    ));
 
   return (
     <Routes>
-      {navigationRoutes.map((route) => (
-        <Route key={route.path} path={route.path} element={route.element} />
-      ))}
+      {renderRoutes(navigationRoutes)}
     </Routes>
   );
 };

@@ -1,9 +1,12 @@
 import "../Profile.scss";
-import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
+import useAxiosPrivate from "@/hooks/useAxiosPrivate";
 import { useEffect, useState } from "react";
 
 const ProfileInfo = () => {
+  // Хук для приватного екземпляру Axios
   const axiosPrivate = useAxiosPrivate();
+
+  // Стан для збереження даних профілю
   const [profile, setProfile] = useState<{
     first_name: string;
     last_name: string;
@@ -13,42 +16,72 @@ const ProfileInfo = () => {
     avatar: string;
   } | null>(null);
 
+  // Стан для збереження помилки
   const [error, setError] = useState<string | null>(null);
+
+  // Стан для збереження URL-адреси аватарки
   const [avatar, setAvatar] = useState("");
+  // Стан для збереження ID користувача
   const [userId, setUserId] = useState<string>("");
 
+  // Ефекти для завантаження даних профілю
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        // отримати CSRF-токен з куків
         const csrfToken: string | undefined =
           document.cookie.match(/csrf_access_token=([^;]+)/)?.[1];
 
+        // отримати дані профілю
         const response = await axiosPrivate.get("/api/user/my-profile", {
           headers: {
             "X-CSRF-TOKEN": csrfToken,
           },
         });
 
+        // зберегти дані профілю
         setProfile(response.data.user_data);
+        // зберегти ID користувача
         setUserId(response.data.user_data.id);
       } catch (err) {
         console.error("Error fetching profile:", err);
+        // встановити помилку, якщо її неможливо завантажити
         setError("Не вдалося завантажити профіль.");
       }
     };
 
+    // викликати функцію для завантаження даних профілю
     fetchProfile();
   }, [axiosPrivate]);
 
+  // Ефекти для завантаження аватарки
   useEffect(() => {
+    // якщо ID користувача вже встановлено
+    if (userId) {
+      axiosPrivate
+        .get(`/api/user/ava/${userId}`, { responseType: "blob" })
+        .then((response: any) => {
+          // зберегти URL-адресу аватарки
+          const url = URL.createObjectURL(response.data);
+          setAvatar(url);
+        })
+        .catch((error: any) => {
+          // якщо аватарка не знайдена, встановити текстовий її замінник
+          if (error.response?.status === 404) {
+            setAvatar("No ava");
+          } else {
+            console.error("Error fetching avatar:", error);
+          }
+        });
+    }
     axiosPrivate
       .get(`/api/user/ava/${userId}`, { responseType: "blob" })
-      .then((response) => {
+      .then((response: any) => {
         console.log(response.data);
         const url = URL.createObjectURL(response.data);
         setAvatar(url);
       })
-      .catch((error) => {
+      .catch((error: any) => {
         if (error.response?.status === 404) {
           setAvatar("No ava");
         } else {
@@ -57,12 +90,14 @@ const ProfileInfo = () => {
       });
   }, [userId]);
 
+  // класи для стилів
   const containerClass = "profile-info bg-base-200";
   const cardClass = "rounded-md bg-base-100 shadow-accent-content max-w-7xl m-auto p-8";
   const nameClass = "text-xl font-semibold";
   const emailClass = "text-sm text-base-content/70";
   const infoListClass = "text-sm space-y-2";
 
+  // якщо помилка не відсутня, вивести повідомлення про помилку
   if (error) {
     return (
       <div className={containerClass}>
@@ -71,6 +106,7 @@ const ProfileInfo = () => {
     );
   }
 
+  // якщо дані профілю не завантажені, вивести повідомлення про завантаження
   if (!profile) {
     return (
       <div className={containerClass}>
@@ -79,12 +115,14 @@ const ProfileInfo = () => {
     );
   }
 
+  // вивести дані профілю
   return (
     <div className={containerClass}>
       <div className={cardClass}>
         <div className="flex gap-5">
           <div className="avatar">
             {avatar === "No ava" ? (
+              // якщо аватарка не знайдена, вивести текстовий її замінник
               <div className="avatar avatar-placeholder">
                 <div className="bg-primary w-40 text-neutral-content w-24">
                   <span className="text-3xl">
@@ -94,6 +132,7 @@ const ProfileInfo = () => {
                 </div>
               </div>
             ) : (
+              // якщо аватарка знайдена, вивести її
               <img src={avatar} alt="avatar" className="settingsAvatarImg" />
             )}
           </div>

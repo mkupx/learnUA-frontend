@@ -1,4 +1,4 @@
-import ProfileAside from "../../../../components/ProfileAside/ProfileAside";
+import ProfileAside from "@components/ProfileAside/ProfileAside";
 import ProfileInfo from "./ProfileInfo";
 
 export default function ProfileWrapper() {

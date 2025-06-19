@@ -7,8 +7,6 @@ import { LogOut, Settings, User } from "lucide-react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useAuth } from "../../context/AuthContext";
 
-// Bell, Shield
-
 const ProfileAside = () => {
   const location = useLocation();
   const current = location.pathname;
@@ -19,8 +17,6 @@ const ProfileAside = () => {
   const menuItems = [
     { name: "Профіль", to: "/profile", icon: <User size={18} /> },
     { name: "Налаштування", to: "/settings", icon: <Settings size={18} /> },
-    // { name: "Повідомлення", to: "/notifications", icon: <Bell size={18} /> },
-    // { name: "Безпека", to: "/security", icon: <Shield size={18} /> },
   ];
 
   function handleLogout() {
@@ -49,14 +45,14 @@ const ProfileAside = () => {
           <motion.div
             className="w-full"
             whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            key={item.to}
           >
             <Link
               className={`btn w-full justify-start gap-2 ${
                 current === item.to ? "btn-primary text-white" : "btn-ghost hover:bg-base-200"
               }`}
-              key={item.to}
               to={item.to}
             >
               {item.icon}

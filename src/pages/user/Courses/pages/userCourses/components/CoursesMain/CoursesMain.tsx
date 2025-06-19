@@ -1,8 +1,9 @@
 import { useState } from "react";
-import CoursesMy from "./components/CoursesCreated";
-import CoursesNow from "./components/CoursesNow";
+import CoursesMy from "../CoursesCreated"; 
+import CoursesNow from "../CoursesNow";
 
 export default function CoursesMain() {
+  // стан табу (активний таб "Мої курси" або "Проходжу зараз")
   const [activeTab, setActiveTab] = useState("my");
 
   return (
@@ -11,13 +12,15 @@ export default function CoursesMain() {
 
       <div className="w-full max-w-4xl mx-auto">
         <div role="tablist" className="tabs tabs-box">
+        {/* таб "Мої курси" */}
           <a
             role="tab"
             className={`tab ${activeTab === "my" ? "tab-active" : ""}`}
             onClick={() => setActiveTab("my")}
           >
-            Мої курси
+            Створені курси
           </a>
+          {/* таб "Проходжу зараз" */}
           <a
             role="tab"
             className={`tab ${activeTab === "enrolled" ? "tab-active" : ""}`}
@@ -27,9 +30,12 @@ export default function CoursesMain() {
           </a>
         </div>
 
+        {/* контент табу */}
         <div className="grid gap-4">
+          {/* контент табу "Мої курси" */}
           {activeTab === "my" && <CoursesMy />}
 
+          {/* контент табу "Проходжу зараз" */}
           {activeTab === "enrolled" && <CoursesNow />}
         </div>
       </div>

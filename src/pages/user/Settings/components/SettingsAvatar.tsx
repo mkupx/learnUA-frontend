@@ -26,7 +26,7 @@ const SettingsAvatar: FC<Props> = ({ userId, user }) => {
     axiosPrivate
       .get(`/api/user/ava/${userId}`, { responseType: "blob" })
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
         const url = URL.createObjectURL(response.data);
         setAvatar(url);
       })
@@ -59,9 +59,8 @@ const SettingsAvatar: FC<Props> = ({ userId, user }) => {
         }
       })
       .catch((error) => {
-        if (error.data.msg !== "Profile ava updated successfully") {
-          setError(error.data.msg);
-        }
+        console.log(error);
+          setError("Помилка при завантаженні аватара. Спробуйте ще раз.");
       });
   }
 
