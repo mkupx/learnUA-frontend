@@ -1,4 +1,4 @@
-import ProfileAside from "../../../../components/ProfileAside/ProfileAside";
+import ProfileAside from "@components/ProfileAside/ProfileAside";
 import SettingsMain from "./SettingsMain";
 
 export default function SettingsWrapper() {

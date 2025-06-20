@@ -21,6 +21,6 @@ export default defineConfig({
     alias: {
       "@components": path.resolve(__dirname, "src/components"),
       "@": path.resolve(__dirname, "src"),
-    },
+    }
   },
 })

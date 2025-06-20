@@ -2,7 +2,7 @@ import Header from "../components/Header/Header";
 import useIsAuth from "../hooks/useIsAuth";
 import { useAuth } from "../context/AuthContext";
 import type React from "react";
-import GlobalLoader from "../components/GlobalLoader";
+import GlobalLoader from "../components/ProfileAside/GlobalLoader";
 
 interface Props {
   children: React.ReactNode;

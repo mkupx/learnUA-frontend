@@ -1,48 +1,46 @@
 import { useState } from "react";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
+import { useNavigate } from "react-router-dom";
 
 function useCreateCourseForm() {
   const axiosPrivate = useAxiosPrivate();
 
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-  });
 
-  const [error, setError] = useState<string>("");
+  const [erroR, setError] = useState<string>("");
+    const navigate = useNavigate();
 
   const createCourse = (data: { title: string; description: string }) => {
-    setFormData(data);
     const csrfToken: string | undefined = document.cookie.match(/csrf_access_token=([^;]+)/)?.[1];
 
     axiosPrivate
-      .post<void>(
-        "/api/course/create-course",
-        {
-          description: formData.description,
-          title: formData.title,
-        },
-        {
-          headers: { "X-CSRF-TOKEN": csrfToken },
-        }
+      .post<{ status: number; msg: string }>(
+      "/api/course/",
+      {
+        description: data.description,
+        title: data.title,
+      },
+      {
+        headers: { "X-CSRF-TOKEN": csrfToken },
+      }
       )
-      .then((response: unknown) => {
-        console.error(response);
-        if (response.data.status === 200 && response.data.msg === "Course created successfully") {
-          console.log("Course created successfully");
-        }
+      .then((response) => {
+      console.error(response);
+      if (response.data.msg === "Course created successfully") {
+        navigate("/courses/userCourses");
+      }
       })
-      .catch((error: unknown) => {
-        if (error.response.data.msg === "Course title must be unique") {
-          setError("Назва курсу повинна бути унікальною");
-        }
+      .catch((error: any) => {
+      if (error?.response?.data?.msg === "Course title must be unique") {
+        setError("Назва курсу повинна бути унікальною");
+      } else {
+        setError("Сталася помилка при створенні курсу, спробуйте ще раз");
+      }
       });
   };
 
   return {
-    setFormData,
     createCourse,
-    errorText: error,
+    erroR,
   };
 }
 

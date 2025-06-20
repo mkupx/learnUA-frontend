@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CoursesMy from "../CoursesCreated"; 
+import CoursesMy from "../CoursesCreated/CoursesCreated"; 
 import CoursesNow from "../CoursesNow";
 
 export default function CoursesMain() {

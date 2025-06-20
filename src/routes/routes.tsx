@@ -10,6 +10,7 @@ import Courses from "../pages/user/Courses/Courses";
 import PrivateRoute from "./PrivateRoute";
 import CreateCourse from "../pages/user/Courses/pages/CreateCourse/CreateCourse";
 import UserCourses from "../pages/user/Courses/pages/userCourses/userCourses";
+import CreatedCoursePage from "@/pages/user/Courses/pages/userCoursePage/userCoursePage";
 
 const AppRoutes = () => {
   const navigationRoutes = [
@@ -58,6 +59,14 @@ const AppRoutes = () => {
         },
       ],
     },
+    {
+      path: "/createdcourse/:id",
+      element: (
+        <PrivateRoute>
+          <CreatedCoursePage />
+        </PrivateRoute>
+      ),
+    },
   ];
 
   const renderRoutes = (routes: any[]) =>
@@ -67,11 +76,7 @@ const AppRoutes = () => {
       </Route>
     ));
 
-  return (
-    <Routes>
-      {renderRoutes(navigationRoutes)}
-    </Routes>
-  );
+  return <Routes>{renderRoutes(navigationRoutes)}</Routes>;
 };
 
 export default AppRoutes;
