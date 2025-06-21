@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "../pages/common/Home/Home";
-import Login from "../pages/common/Login/Login";
-import Register from "../pages/common/Register/Register";
+import Home from "../features/Home/Home";
+import Login from "@/features/auth/pages/Login/Login";
+import Register from "@/features/auth/pages/Register/Register";
 
-import Profile from "../pages/user/Profile/Profile";
-import Settings from "../pages/user/Settings/Settings";
-import Courses from "../pages/user/Courses/Courses";
+import Profile from "../features/profile/pages/Profile/Profile";
+import Settings from "../features/profile/pages/Settings/Settings";
+import Courses from "../features/courses/pages/Courses/Courses";
 
 import PrivateRoute from "./PrivateRoute";
-import CreateCourse from "../pages/user/Courses/pages/CreateCourse/CreateCourse";
-import UserCourses from "../pages/user/Courses/pages/userCourses/userCourses";
-import CreatedCoursePage from "@/pages/user/Courses/pages/userCoursePage/userCoursePage";
+import CreateCourse from "../features/courses/pages/CreateCourse/CreateCourse";
+import UserCourses from "../features/courses/pages/userCourses/userCourses";
+import CreatedCoursePage from "@/features/courses/pages/userCoursePage/userCoursePage";
 
 const AppRoutes = () => {
   const navigationRoutes = [
