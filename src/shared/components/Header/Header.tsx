@@ -29,7 +29,7 @@ const Header = () => {
 
           <div className="flex gap-10">
             <div className="flex gap-2">
-              <button className="btn p-2" data-set-theme="mytheme" data-act-class="btn-primary">
+              <button className="btn p-2" data-set-theme="corporate" data-act-class="btn-primary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -45,7 +45,7 @@ const Header = () => {
                   />
                 </svg>
               </button>
-              <button className="btn p-2" data-set-theme="mydarktheme" data-act-class="btn-primary">
+              <button className="btn p-2" data-set-theme="dim" data-act-class="btn-primary">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

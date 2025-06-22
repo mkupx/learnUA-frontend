@@ -36,7 +36,7 @@ function CreatedCourseWrapper() {
           <div className={styles.header}>
             <h1 className={styles.title}>{courseInfo.title}</h1>
             <div className={styles.buttonGroup}>
-              <Link to={`/courses/editcourse/${id}`} className={styles.editButton}>
+              <Link to={`/courses/editcourse/${id}/info`} className={styles.editButton}>
                 Редагувати
               </Link>
               <button className={styles.deleteButton}>Видалити</button>
