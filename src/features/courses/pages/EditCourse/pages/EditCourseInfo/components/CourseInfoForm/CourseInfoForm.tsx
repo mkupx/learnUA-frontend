@@ -1,22 +1,23 @@
 import { Formik, Form } from "formik";
-import { type initialValues } from "./helper";
 import Input from "@/shared/components/Input/Input";
 import { validationSchema } from "./helper";
+import useCourseInfoForm from "./useCourseInfoForm";
 
 function CourseInfoForm() {
-  const initialValues: initialValues = {
-    title: "",
-    description: "",
-  };
+
+  const { initialValues, error, handleEditCourse} = useCourseInfoForm();
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
 
   return (
     <>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => {
-          console.log("Form submitted with values:", values);
-        }}
+        onSubmit={(values) => handleEditCourse(values)}
         validationSchema={validationSchema}
+        enableReinitialize={true}
       >
         <Form>
           <Input label="Назва курсу" name="title" id="title" placeholder="Введіть назву курсу" />

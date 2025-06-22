@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import useAxiosPrivate from "@/shared/hooks/useAxiosPrivate";
 import SettingsAvatar from "../SettingsAvatar";
 import { settingsValidationSchema } from "./helper";
-import Input from "../../../../../../shared/components/Input/Input";
+import Input from "@/shared/components/Input/Input";
 import * as motion from "motion/react-client";
 
 export default function SettingsForm() {
@@ -26,7 +26,6 @@ export default function SettingsForm() {
   }
 
   const handleSubmit = (values: ValuesTypes) => {
-    console.log("submit", values);
     const csrfToken: string | undefined = document.cookie.match(/csrf_access_token=([^;]+)/)?.[1];
     axiosPrivate
       .put("/api/user/update-profile", values, {

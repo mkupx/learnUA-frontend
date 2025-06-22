@@ -1,8 +1,8 @@
 import * as Yup from "yup";
 
 const regx = {
-    title: /^[a-zA-Z0-9\s]{3,50}$/,
-    description: /^[a-zA-Z0-9\s.,!?]{10,500}$/,
+    title: /^[a-zA-Z0-9\s+.\-:;'"]{3,50}$/,
+    description: /^[a-zA-Z0-9\s+.\-:;'"]{10,500}$/,
 }
 
 const titleValidation = Yup.string()
@@ -17,8 +17,3 @@ export const validationSchema = Yup.object({
     title: titleValidation,
     description: descriptionValidation,
 });
-
-export type initialValues = {
-  title: string;
-  description: string;
-}

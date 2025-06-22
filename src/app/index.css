@@ -1,6 +1,4 @@
 @import "tailwindcss";
- @plugin "daisyui" {
-
-   themes: business "mydarktheme", corporate "mytheme", dim "theme";
-
- }
+@plugin "daisyui" {
+  themes: business "mydarktheme", corporate "mytheme", dim "theme";
+}
