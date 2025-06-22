@@ -1,4 +1,5 @@
-import { useEffect, useState, FC } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import * as motion from "motion/react-client";
 import "../Settings.scss";
 
@@ -15,7 +16,7 @@ interface Props {
   user: User;
 }
 
-const SettingsAvatar: FC<Props> = ({ userId, user }) => {
+const SettingsAvatar: React.FC<Props> = ({ userId, user }) => {
   const [avatar, setAvatar] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
   const [error, setError] = useState<string>("");

@@ -1,4 +1,3 @@
-
 const sections = [
   {
     title: "Секція 1: Вступ",
@@ -15,13 +14,13 @@ const sections = [
 ];
 
 function SectionsAccordion() {
-  const headingClass = "text-2xl font-bold mb-3 text-blue-700";
-  const containerClass = "w-full";
-  const joinClass = "join join-vertical w-full mb-4";
-  const collapseClass = "collapse collapse-arrow join-item bg-blue-50 mb-2";
-  const collapseTitleClass = "collapse-title font-semibold text-blue-800";
+  const containerClass = "w-full max-w-xl ";
+  const headingClass = "text-2xl font-bold mb-4 text-primary";
+  const joinClass = "join join-vertical w-full";
+  const collapseClass = "collapse collapse-arrow join-item border border-base-300 bg-base-100";
+  const collapseTitleClass = "collapse-title text-lg font-medium";
   const collapseContentClass = "collapse-content";
-  const lessonListClass = "list-disc pl-8 py-2";
+  const lessonListClass = "list-disc pl-6";
   const lessonItemClass = "py-1";
 
   return (

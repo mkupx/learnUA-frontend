@@ -1,16 +1,20 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "../features/Home/Home";
+
 import Login from "@/features/auth/pages/Login/Login";
 import Register from "@/features/auth/pages/Register/Register";
 
 import Profile from "../features/profile/pages/Profile/Profile";
 import Settings from "../features/profile/pages/Settings/Settings";
-import Courses from "../features/courses/pages/Courses/Courses";
 
 import PrivateRoute from "./PrivateRoute";
+
+import Courses from "../features/courses/pages/Courses/Courses";
 import CreateCourse from "../features/courses/pages/CreateCourse/CreateCourse";
 import UserCourses from "../features/courses/pages/userCourses/userCourses";
 import CreatedCoursePage from "@/features/courses/pages/userCoursePage/userCoursePage";
+import EditCourse from "@/features/courses/pages/EditCourse/EditCourse";
+import EditCourseInfo from "@/features/courses/pages/EditCourse/pages/EditCourseInfo/EditCourseInfo";
 
 const AppRoutes = () => {
   const navigationRoutes = [
@@ -66,6 +70,24 @@ const AppRoutes = () => {
           <CreatedCoursePage />
         </PrivateRoute>
       ),
+    },
+    {
+      path: "/courses/editcourse/:id",
+      element: (
+        <PrivateRoute>
+          <EditCourse />
+        </PrivateRoute>
+      ),
+      children: [
+        {
+          path: "info",
+          element: (
+            <PrivateRoute>
+              <EditCourseInfo />
+            </PrivateRoute>
+          ),
+        },
+      ],
     },
   ];
 

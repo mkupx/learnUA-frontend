@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.8",
+    "@tailwindcss/vite": "^4.1.10",
     "axios": "^1.9.0",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
@@ -22,7 +22,7 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.1",
     "sass": "^1.89.1",
-    "tailwindcss": "^4.1.8",
+    "tailwindcss": "^4.1.10",
     "theme-change": "^2.5.0",
     "yup": "^1.6.1"
   },
