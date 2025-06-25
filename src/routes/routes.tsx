@@ -16,6 +16,7 @@ import CreatedCoursePage from "@/features/courses/pages/userCoursePage/userCours
 import EditCourse from "@/features/courses/pages/EditCourse/EditCourse";
 import EditCourseInfo from "@/features/courses/pages/EditCourse/pages/EditCourseInfo/EditCourseInfo";
 import EditSections from "@/features/courses/pages/EditCourse/pages/EditSections/EditSections";
+import EditLessons from "@/features/courses/pages/EditCourse/pages/EditLessons/EditLessons";
 
 const AppRoutes = () => {
   const navigationRoutes = [
@@ -93,6 +94,14 @@ const AppRoutes = () => {
           element: (
             <PrivateRoute>
               <EditSections />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "lessons",
+          element: (
+            <PrivateRoute>
+              <EditLessons />
             </PrivateRoute>
           ),
         },

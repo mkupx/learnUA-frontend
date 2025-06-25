@@ -1,19 +1,15 @@
-const sections = [
-  {
-    title: "Секція 1: Вступ",
-    lessons: ["Урок 1: Знайомство", "Урок 2: Мотивація"],
-  },
-  {
-    title: "Секція 2: Основи",
-    lessons: ["Урок 1: Базові поняття", "Урок 2: Приклади"],
-  },
-  {
-    title: "Секція 3: Практика",
-    lessons: ["Урок 1: Завдання", "Урок 2: Відповіді"],
-  },
-];
 
-function SectionsAccordion() {
+type propsType = {
+  sections: [
+    {
+      lessons: [];
+      id: number | null;
+      title: string | null;
+    }
+  ];
+};
+
+function SectionsAccordion({sections}: propsType) {
   const containerClass = "w-full max-w-xl ";
   const headingClass = "text-2xl font-bold mb-4 text-primary";
   const joinClass = "join join-vertical w-full";
@@ -23,9 +19,11 @@ function SectionsAccordion() {
   const lessonListClass = "list-disc pl-6";
   const lessonItemClass = "py-1";
 
+  console.log(sections);
+
   return (
     <>
-      <h2 className={headingClass}>Секції курсу</h2>
+      <h2 className={headingClass}>Секції курсу:</h2>
       <div className={containerClass}>
         <div className={joinClass}>
           {sections.map((section, idx) => (

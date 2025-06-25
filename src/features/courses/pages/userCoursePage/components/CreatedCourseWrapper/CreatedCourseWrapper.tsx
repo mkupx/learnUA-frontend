@@ -2,6 +2,7 @@ import SectionsAccordion from "../SectionsAccordion/SectionsAccordion";
 import { Link } from "react-router-dom";
 import useCreatedCourseId from "./useCreatedCourseId";
 import useCourseInfo from "../../hooks/useCourseInfo";
+import GlobalLoader from "@/shared/components/ProfileAside/GlobalLoader";
 
 function CreatedCourseWrapper() {
   const styles = {
@@ -17,16 +18,22 @@ function CreatedCourseWrapper() {
     descriptionLabel: "font-semibold",
   };
 
-  const { courseInfo, error } = useCourseInfo();
+  const { courseInfo, error, isLoading } = useCourseInfo();
 
   const id: string | null = useCreatedCourseId();
 
   if (!id) {
-    return <div className="text-center text-red-500">Курс не знайдено.</div>;
+    <div className="text-center text-red-500 text-2xl flex items-center justify-center" style={{ minHeight: "70vh" }}>
+      Курс не знайдено.
+    </div>
   }
 
   if (error) {
-    return <div className="text-center text-red-500">Помилка завантаження курсу: {error}</div>;
+    return <div className="text-center text-red-500 text-2xl flex items-center justify-center">Помилка завантаження курсу: {error}</div>;
+  }
+
+  if(isLoading === true) {
+    <GlobalLoader />
   }
 
   return (
@@ -49,7 +56,7 @@ function CreatedCourseWrapper() {
             </p>
           </div>
           <div>
-            <SectionsAccordion />
+            <SectionsAccordion sections={courseInfo.sections}/>
           </div>
         </div>
       </div>

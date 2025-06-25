@@ -17,7 +17,7 @@ type inputProps = {
 };
 
 
-const Input: FC<inputProps> = ({ id, label, name, placeholder, type = "text" }) => {
+const Input = ({ id, label, name, placeholder, type = "text" } : inputProps) => {
   return (
     <div className={inputContainer}>
       <label htmlFor={id} className={labelClasses}>

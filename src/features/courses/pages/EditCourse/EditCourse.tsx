@@ -1,7 +1,7 @@
 import Header from "@/shared/components/Header/Header";
 import Footer from "@/shared/components/Footer/Footer";
 import { Outlet } from "react-router-dom";
-import { InfoIcon, SectionIcon, DeleteIcon } from "./icons";
+import { InfoIcon, SectionIcon, DeleteIcon, LessonsIcon } from "./icons";
 import { useLocation, Link } from "react-router-dom";
 
 function EditCourse() {
@@ -9,6 +9,7 @@ function EditCourse() {
 
   const isInfoActive = location.pathname.endsWith("/info");
   const isSectionsActive = location.pathname.endsWith("/sections");
+  const isLessonsActive = location.pathname.endsWith("/lessons");
 
 
   const containerClass = "flex min-h-[93vh] pt-8 pb-8 bg-base-200 justify-center";
@@ -20,6 +21,9 @@ function EditCourse() {
   }`;
   const sectionBtnClass = `btn btn-ghost justify-start gap-2 text-base${
     isSectionsActive ? " bg-base-300" : ""
+  }`;
+  const lessonsBtnClass = `btn btn-ghost justify-start gap-2 text-base${
+    isLessonsActive ? " bg-base-300" : ""
   }`;
   const deleteBtnClass = "btn btn-outline btn-error justify-start gap-2 text-base mt-4";
   const mainClass = "flex-1 p-10 bg-base-50";
@@ -41,6 +45,10 @@ function EditCourse() {
               <Link className={sectionBtnClass} to="sections" state={{ from: location }}>
                 <SectionIcon />
                 Секції
+              </Link>
+              <Link className={lessonsBtnClass} to="lessons" state={{ from: location }}>
+                <LessonsIcon />
+                Уроки
               </Link>
               <button className={deleteBtnClass}>
                 <DeleteIcon />
