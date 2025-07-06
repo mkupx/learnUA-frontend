@@ -1,9 +1,8 @@
 import AppRoutes from "../routes/routes";
-import { AuthProvider } from "../context/AuthContext";
+import { AuthProvider } from "./providers";
+import "./styles/App.css";
 
 function App() {
-  
-
   return (
     <>
       <AuthProvider>

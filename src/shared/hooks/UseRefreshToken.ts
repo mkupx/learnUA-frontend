@@ -1,5 +1,5 @@
 import { axiosPrivate } from "@/shared/api/axios";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/features/auth/model/useAuth";
 
 const useRefreshToken = () => {
 
@@ -18,11 +18,11 @@ const useRefreshToken = () => {
                     },
                 }
             )
-            .then((response) => {
-                if (response.status === 200) {
-                    login();
-                }
-            });
+                .then((response) => {
+                    if (response.status === 200) {
+                        login();
+                    }
+                });
         } catch (error) {
             console.error("Failed to refresh token:", error);
             throw error;

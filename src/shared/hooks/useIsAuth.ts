@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useAxiosPrivate from "./useAxiosPrivate";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/features/auth/model/useAuth";
 
 const useIsAuth = () => {
     const axiosPrivate = useAxiosPrivate();

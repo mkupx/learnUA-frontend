@@ -1,22 +1,22 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "../features/Home/Home";
+import Home from "@/pages/HomePage";
 
-import Login from "@/features/auth/pages/Login/Login";
-import Register from "@/features/auth/pages/Register/Register";
+import Login from "@/pages/auth/LoginPage";
+import Register from "@/pages/auth/RegisterPage";
 
-import Profile from "../features/profile/pages/Profile/Profile";
-import Settings from "../features/profile/pages/Settings/Settings";
+import Profile from "@/pages/ProfilePage";
+import Settings from "@/pages/SettingsPage";
 
 import PrivateRoute from "./PrivateRoute";
 
-import Courses from "../features/courses/pages/Courses/Courses";
-import CreateCourse from "../features/courses/pages/CreateCourse/CreateCourse";
-import UserCourses from "../features/courses/pages/userCourses/userCourses";
-import CreatedCoursePage from "@/features/courses/pages/userCoursePage/userCoursePage";
-import EditCourse from "@/features/courses/pages/EditCourse/EditCourse";
-import EditCourseInfo from "@/features/courses/pages/EditCourse/pages/EditCourseInfo/EditCourseInfo";
-import EditSections from "@/features/courses/pages/EditCourse/pages/EditSections/EditSections";
-import EditLessons from "@/features/courses/pages/EditCourse/pages/EditLessons/EditLessons";
+import Courses from "@/pages/courses/CoursesPage";
+import CreateCourse from "@/pages/CreateCoursePage";
+import UserCourses from "@/pages/courses/UserCoursesPage";
+import CreatedCoursePage from "@/pages/UserCoursePage";
+import EditCourse from "@/pages/edit-courses/EditCoursePage";
+import EditCourseInfo from "@/pages/edit-courses/EditCourseInfoPage";
+import EditSections from "@/pages/edit-courses/EditSectionsPage";
+import EditLessons from "@/pages/edit-courses/EditLessonsPage";
 
 const AppRoutes = () => {
   const navigationRoutes = [
