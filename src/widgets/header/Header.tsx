@@ -12,6 +12,7 @@ const Header = () => {
   }, []);
 
   const { isAuth } = useAuth();
+  
   useIsAuth();
 
   return (
@@ -77,3 +78,4 @@ const Header = () => {
 };
 
 export default Header;
+export { Header };

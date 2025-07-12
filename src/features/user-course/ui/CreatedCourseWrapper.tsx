@@ -1,8 +1,8 @@
-import SectionsAccordion from "@/widgets/sections-accordion/SectionsAccordion";
+import { SectionsAccordion } from "@/widgets";
 import { Link } from "react-router-dom";
 import useCreatedCourseId from "../model/useCreatedCourseId";
 import useCourseInfo from "../model/useCourseInfo";
-import GlobalLoader from "@/shared/ui/GlobalLoader/GlobalLoader";
+import { GlobalLoader } from "@/shared/ui";
 
 function CreatedCourseWrapper() {
   const styles = {
@@ -20,7 +20,7 @@ function CreatedCourseWrapper() {
 
   const { courseInfo, error, isLoading } = useCourseInfo();
 
-  const id: string | null = useCreatedCourseId();
+  const id: string | undefined = useCreatedCourseId();
 
   if (!id) {
     <div className="text-center text-red-500 text-2xl flex items-center justify-center" style={{ minHeight: "70vh" }}>
@@ -32,34 +32,33 @@ function CreatedCourseWrapper() {
     return <div className="text-center min-h-[93vh] text-red-500 text-4xl flex items-center justify-center">Помилка завантаження курсу: {error}</div>;
   }
 
-  if (isLoading === true) {
-    <GlobalLoader />;
-  }
-
   return (
     <>
-      <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <h1 className={styles.title}>{courseInfo.title}</h1>
-            <div className={styles.buttonGroup}>
-              <Link to={`/courses/editcourse/${id}/info`} className={styles.editButton}>
-                Редагувати
-              </Link>
-              <button className={styles.deleteButton}>Видалити</button>
+      {isLoading && <GlobalLoader />}
+      {courseInfo && (
+        <div className={styles.wrapper}>
+          <div className={styles.container}>
+            <div className={styles.header}>
+              <h1 className={styles.title}>{courseInfo.title}</h1>
+              <div className={styles.buttonGroup}>
+                <Link to={`/courses/editcourse/${id}/info`} className={styles.editButton}>
+                  Редагувати
+                </Link>
+                <button className={styles.deleteButton}>Видалити</button>
+              </div>
+            </div>
+            <div className={styles.descriptionWrapper}>
+              <p className={styles.descriptionText}>
+                <span className={styles.descriptionLabel}>Опис курсу:</span>
+                <span className="block">{courseInfo.description}</span>
+              </p>
+            </div>
+            <div>
+              <SectionsAccordion sections={courseInfo.sections} />
             </div>
           </div>
-          <div className={styles.descriptionWrapper}>
-            <p className={styles.descriptionText}>
-              <span className={styles.descriptionLabel}>Опис курсу:</span>
-              <span className="block">{courseInfo.description}</span>
-            </p>
-          </div>
-          <div>
-            <SectionsAccordion sections={courseInfo.sections} />
-          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

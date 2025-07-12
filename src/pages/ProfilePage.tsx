@@ -1,6 +1,6 @@
 import Footer from "@/widgets/footer/Footer";
 import Header from "@/widgets/header/Header";
-import ProfileWrapper from "@/entities/user/ui/ProfileWrapper";
+import ProfileWrapper from "@/features/profile/ui/ProfileWrapper";
 
 const Profile = () => {
   return (

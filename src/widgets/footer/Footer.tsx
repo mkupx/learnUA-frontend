@@ -7,7 +7,7 @@ export default function Footer() {
         <Link to="/" className="btn btn-ghost text-xl">
           learnUA
         </Link>
-        <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+        <p>Copyright © 2025 - All right reserved</p>
       </aside>
       <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <a>
@@ -29,3 +29,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export { Footer };

@@ -66,3 +66,5 @@ const ProfileAside = () => {
 };
 
 export default ProfileAside;
+
+export { ProfileAside };

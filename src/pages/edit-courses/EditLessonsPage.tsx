@@ -1,17 +1,17 @@
 import { Formik, Form } from "formik";
 import useEditLessons from "@/features/course-edit/model/useEditLessons";
 import Input from "@/shared/ui/Input/Input";
-import useGetCourse from "@/shared/hooks/useGetCourse";
+import useGetCourse from "@/entities/course/model/useGetCourse";
 import { useEffect, useState } from "react";
 
 function EditLessons() {
   const { values, createLesson, course_id, lessonsError } = useEditLessons();
   const { course, error } = useGetCourse(course_id);
 
-  const [sections, setSections] = useState();
+  const [sections, setSections] = useState<{ value: any; text: any; }[]>();
 
   useEffect(() => {
-    if (course !== null) {
+    if (course !== null && course !== undefined) {
       const formatted = course.sections.map((s: any) => ({
         value: s.id,
         text: s.title,

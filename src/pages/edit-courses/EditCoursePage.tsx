@@ -1,12 +1,16 @@
-import Header from "@/widgets/header/Header";
-import Footer from "@/widgets/footer/Footer";
+import { Header, Footer } from "@/widgets";
 import { Outlet } from "react-router-dom";
 import { InfoIcon, SectionIcon, DeleteIcon, LessonsIcon } from "@/features/course-edit/ui/icons";
 import { useLocation, Link } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import useGetCourse from "@/entities/course/model/useGetCourse";
 
 function EditCourse() {
+  const params = useParams();
   const location = useLocation();
+
+  const courseID: string | undefined = params.id;
+  const { course } = useGetCourse(courseID);
 
   const isInfoActive = location.pathname.endsWith("/info");
   const isSectionsActive = location.pathname.endsWith("/sections");
@@ -50,7 +54,7 @@ function EditCourse() {
             </nav>
           </aside>
           <main className={mainClass}>
-            <h1 className={headingClass}>Панель керування курсом</h1>
+            <h1 className={headingClass}>Панель керування курсом "{course?.title}"</h1>
             <div className={contentClass}>
               <Outlet />
             </div>

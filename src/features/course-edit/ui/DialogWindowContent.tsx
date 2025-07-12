@@ -24,7 +24,7 @@ function DialogWindowContent({ dialogId }: DialogWindowContentProps) {
   return (
     <>
       <div className="max-w-2xl w-full">
-        <Formik initialValues={sectionFormData} validationSchema={validationSchema.custom} onSubmit={(data) => createSection(data.title, courseId)}>
+        <Formik initialValues={sectionFormData} validationSchema={validationSchema} onSubmit={(data) => createSection(data.title, courseId)}>
           <Form>
             <Input id="title" name="title" label="Назва секції" placeholder="Введіть назву секції" />
             {error && <p className="text-error">Секція з такою назвою уже існує</p>}

@@ -5,42 +5,48 @@ import { useNavigate } from "react-router-dom";
 function useCreateCourseForm() {
   const axiosPrivate = useAxiosPrivate();
 
-
+  const [isLoading, setIsLoading] = useState(false);
   const [erroR, setError] = useState<string>("");
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
 
   const createCourse = (data: { title: string; description: string }) => {
     const csrfToken: string | undefined = document.cookie.match(/csrf_access_token=([^;]+)/)?.[1];
 
+    setIsLoading(true);
     axiosPrivate
       .post<{ status: number; msg: string }>(
-      "/api/course/",
-      {
-        description: data.description,
-        title: data.title,
-      },
-      {
-        headers: { "X-CSRF-TOKEN": csrfToken },
-      }
+        "/api/course/",
+        {
+          description: data.description,
+          title: data.title,
+        },
+        {
+          headers: { "X-CSRF-TOKEN": csrfToken },
+        }
       )
       .then((response) => {
-      console.error(response);
-      if (response.data.msg === "Course created successfully") {
-        navigate("/courses/userCourses");
-      }
+        console.error(response);
+        if (response.data.msg === "Course created successfully") {
+          navigate("/courses/userCourses");
+        }
       })
       .catch((error: any) => {
-      if (error?.response?.data?.msg === "Course title must be unique") {
-        setError("Назва курсу повинна бути унікальною");
-      } else {
-        setError("Сталася помилка при створенні курсу, спробуйте ще раз");
-      }
+        if (error?.response?.data?.msg === "Course title must be unique") {
+          setError("Назва курсу повинна бути унікальною");
+        } else {
+          setError("Сталася помилка при створенні курсу, спробуйте ще раз");
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   return {
     createCourse,
     erroR,
+    isLoading
   };
 }
 
